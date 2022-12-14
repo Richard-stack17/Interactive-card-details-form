@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './App.css'
+import FormCard from './components/FormCard'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -7,8 +8,7 @@ function App() {
   return (
     <div className="App">
       <h1>Probanding</h1>
-      <h2>Hi planet</h2>
-      <div>Div Div Div Div </div>
+      <FormCard/>
     </div>
   )
 }
