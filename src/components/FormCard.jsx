@@ -1,16 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
-const FormCard = () => {
-  const { register, handleSubmit, reset } = useForm();
-  const submit=(data)=>{
-    console.log(data);
+const FormCard = ({formCard,setFormCard}) => {
+  
+  const handleChange = e =>{
+    setFormCard(
+      {
+        ...formCard,[e.target.name]:e.target.value
+      }
+    )
   }
+  
+
   return (
-    <form onSubmit={handleSubmit(submit)}>
+    <form>
       <div>
         <label htmlFor="">CARDHOLDER NAME</label>
-        <input type="text" {...register("cardName")} placeholder="e.g. Jane Appleseed" />
+        <input id='name' name='name' onChange={handleChange} type="text"  placeholder="e.g. Jane Appleseed" />
       </div>
       <div>
         <label htmlFor="">CARD NUMBER</label>
@@ -18,24 +24,24 @@ const FormCard = () => {
           type="text"
           minLength={16}
           maxLength={16}
-          {...register("cardNumber")}
           placeholder="e.g 1234 5678 9123 0000"
+          name="number"
+          onChange={handleChange}
         />
       </div>
       <div>
         <div>
           <label htmlFor="">EXP. DATE (MM/YY)</label>
-          <input type="text" placeholder="MM" {...register("month")}/>
-          <input type="text" placeholder="YY"{...register("year")}/>
+          <input name="month" type="text" placeholder="MM" onChange={handleChange}/>
+          <input name="year" type="text" placeholder="YY" onChange={handleChange}/>
         </div>
         <div>
           <label htmlFor="">CVC</label>
-          <input type="text" placeholder="e.g. 123" {...register("cvc")} />
+          <input name="cvc" type="text" placeholder="e.g. 123" onChange={handleChange}/>
         </div>
       </div>
       <button>Confirm</button>
     </form>
   );
 };
-
 export default FormCard;
